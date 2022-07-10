@@ -26,7 +26,7 @@ pipeline{
                 }
             }
         }
-        stage(docker build & docker push){
+        stage("docker build & docker push"){
             steps{
                 script{
                     withCredentials([string(credentialsId: 'nexus_password', variable: 'nexus_passwordsnipp')]) {
