@@ -54,7 +54,7 @@ pipeline{
                 }
             }
         }
-        stage("docker build & docker push"){
+        stage("helm push repo stage"){
             steps{
                 script{
                     withCredentials([string(credentialsId: 'nexus_password', variable: 'nexus_passwordsnipp')]) {
