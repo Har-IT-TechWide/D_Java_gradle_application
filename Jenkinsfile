@@ -60,7 +60,7 @@ pipeline{
                              sh '''
                                  helmversion=$( helm show chart myapp | grep version | cut -d: -f 2 | tr -d ' ')
                                  tar -czvf  myapp-${helmversion}.tgz myapp/
-                                 curl -u admin:$nexus_password http://34.82.248.16:8081/repository/helm-hosted/ --upload-file myapp-${helmversion}.tgz -v
+                                 curl -u admin:$nexus_passwordsnipp http://34.82.248.16:8081/repository/helm-hosted/ --upload-file myapp-${helmversion}.tgz -v
                             '''
                           }
                     }
@@ -84,7 +84,7 @@ pipeline{
                    withCredentials([kubeconfigFile(credentialsId: 'kubernetes-config', variable: 'KUBECONFIG')]) {
                         dir('kubernetes/') {
                           sh 'helm upgrade --install --set image.repository="34.82.248.16:8083/springapp" --set image.tag="${VERSION}" myjavaapp myapp/ '
-                          sh 'kubectl scale myjavaapp-myapp --replicas=5'
+                        //   sh 'kubectl scale myjavaapp-myapp --replicas=5'
                         }
                     }
                }
